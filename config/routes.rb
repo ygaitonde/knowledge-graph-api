@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ('/')
-  # root 'articles#index'
+  # create a new entity with a give type and keys
+  resources :entities, only: %i[create] do
+    # get all properties for an entity
+    resources :properties, only: %i[index]
+    # query chain of properties starting at an entity
+    resource :value, only: %i[show]
+  end
 end

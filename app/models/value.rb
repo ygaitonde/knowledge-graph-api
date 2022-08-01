@@ -16,7 +16,6 @@ class Value < ApplicationRecord
   belongs_to :property
   belongs_to :entity
   has_one :entity_value, class_name: 'Entity', foreign_key: :id
-  has_one :property, foreign_key: :id
 
   def value
     case property.data_type

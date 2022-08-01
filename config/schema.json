@@ -1,0 +1,35 @@
+{
+  "types": [
+    {
+      "name": "Fruit",
+      "keys": [
+        {
+          "name": "name",
+          "type": {
+            "typeName": "string"
+          }
+        },
+        {
+          "name": "color",
+          "type": {
+            "typeName": "entity",
+            "metadata": {
+              "entityTypeName" : "Color"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Color",
+      "keys": [
+        {
+          "name": "name",
+          "type": {
+            "typeName": "string"
+          }
+        }
+      ]
+    }
+  ]
+}
