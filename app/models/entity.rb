@@ -30,7 +30,6 @@ class Entity < ApplicationRecord
   end
 
   def create_value(property, value)
-    binding.pry
     case property.data_type
     when Property::DataType::STRING
       Value.new(entity: self, property: property, string_value: value)

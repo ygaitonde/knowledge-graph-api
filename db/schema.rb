@@ -31,9 +31,11 @@ ActiveRecord::Schema[7.0].define(version: 20_220_729_053_923) do
     t.string 'label'
     t.string 'data_type'
     t.integer 'entity_type_id', null: false
+    t.integer 'reference_type_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['entity_type_id'], name: 'index_properties_on_entity_type_id'
+    t.index ['reference_type_id'], name: 'index_properties_on_reference_type_id'
   end
 
   create_table 'values', force: :cascade do |t|
@@ -50,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_729_053_923) do
 
   add_foreign_key 'entities', 'entity_types'
   add_foreign_key 'properties', 'entity_types'
+  add_foreign_key 'properties', 'entity_types', column: 'reference_type_id'
   add_foreign_key 'values', 'entities', column: 'entity_value_id'
   add_foreign_key 'values', 'properties'
 end

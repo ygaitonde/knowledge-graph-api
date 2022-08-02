@@ -6,6 +6,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.string :label
       t.string :data_type
       t.references :entity_type, null: false, foreign_key: true
+      t.references :reference_type, null: true, foreign_key: { to_table: :entity_types }
 
       t.timestamps
     end
