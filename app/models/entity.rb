@@ -24,9 +24,10 @@ class Entity < ApplicationRecord
   end
 
   def save_with_values!(values)
-    transaction do
-      values.each(&:save!)
+    ActiveRecord::Base.transaction do
+      values.each { |v| v.update(entity_id: id) }
       save!
+      values.each(&:save!)
     end
   end
 
