@@ -3,7 +3,6 @@
 # Table name: entities
 #
 #  id             :integer          not null, primary key
-#  name           :string
 #  entity_type_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

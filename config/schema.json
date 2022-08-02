@@ -12,10 +12,8 @@
         {
           "name": "color",
           "type": {
-            "typeName": "entity",
-            "metadata": {
-              "entityTypeName" : "Color"
-            }
+            "name": "entity",
+            "referenceType" : "Color"
           }
         }
       ]
@@ -26,7 +24,7 @@
         {
           "name": "name",
           "type": {
-            "typeName": "string"
+            "name": "string"
           }
         }
       ]

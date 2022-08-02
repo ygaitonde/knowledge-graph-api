@@ -19,5 +19,5 @@ class Property < ApplicationRecord
   end
 
   belongs_to :entity_type
-  belongs_to :reference_type, class_name: 'EntityType', foreign_key: :reference_type_id
+  belongs_to :reference_type, class_name: 'EntityType', foreign_key: :reference_type_id, optional: true
 end
