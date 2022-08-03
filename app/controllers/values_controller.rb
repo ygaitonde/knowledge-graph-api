@@ -4,7 +4,7 @@ class ValuesController < ApplicationController
   def show
     entity = Entity.find(params[:entity_id])
 
-    return render json: { error: 'Entity not found' }, status: :not_found unless entity.present?
+    return render json: { error: 'Invalid entity' }, status: :not_found unless entity.present? && entity.valid?
 
     value = entity.find_value_from_chain(params[:chain])
 

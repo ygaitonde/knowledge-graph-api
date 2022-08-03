@@ -3,6 +3,11 @@
 class PropertiesController < ApplicationController
   def index
     entity = Entity.find(params[:entity_id])
-    render json: entity.entity_type.properties.select(:id, :label, :data_type)
+
+    if entity.valid?
+      render json: entity.entity_type.properties.select(:id, :label, :data_type)
+    else
+      render json: { errors: entity.errors }, status: :unprocessable_entity
+    end
   end
 end
