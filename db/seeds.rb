@@ -19,14 +19,13 @@ fruit_color = Property.create!(
 )
 color_name = Property.create!(label: 'Name', entity_type: color, data_type: Property::DataType::STRING)
 
-apple = Entity.new(entity_type: fruit)
 red = Entity.new(entity_type: color)
+red_values = [Value.new(entity: red, property: color_name, string_value: 'red')]
+red.save_with_values!(red_values)
 
+apple = Entity.new(entity_type: fruit)
 apple_values = [
   Value.new(entity: apple, property: fruit_name, string_value: 'apple'),
   Value.new(entity: apple, property: fruit_color, entity_value: red)
 ]
-red_values = [Value.new(entity: red, property: color_name, string_value: 'red')]
-
 apple.save_with_values!(apple_values)
-red.save_with_values!(red_values)

@@ -15,11 +15,15 @@ class Entity < ApplicationRecord
 
   validate :values_for_all_properties
 
-  def values_for_all_properties
-    entity_type.properties.each do |property|
-      unless Value.find_by(property: property, entity: self).present?
-        errors.add(:values, "missing value for #{property.label}")
-      end
+  def find_value_from_chain(chain)
+    chain.reduce(self) do |acc, property_name|
+      property = Property.find_by(entity_type: acc&.entity_type, label: property_name)
+
+      return nil unless property.present?
+
+      value = Value.find_by(property: property, entity: acc)
+
+      value.value
     end
   end
 
@@ -48,6 +52,16 @@ class Entity < ApplicationRecord
       Value.new(entity: self, property: property, entity_value: entity_value)
     else
       Value.new
+    end
+  end
+
+  private
+
+  def values_for_all_properties
+    entity_type.properties.each do |property|
+      unless Value.find_by(property: property, entity: self).present?
+        errors.add(:values, "missing value for #{property.label}")
+      end
     end
   end
 end
