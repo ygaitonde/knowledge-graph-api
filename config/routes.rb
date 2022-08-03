@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     # get all properties for an entity
     resources :properties, only: %i[index]
     # query chain of properties starting at an entity
-    resource :value, only: %i[show]
+    resource :values, only: %i[show]
   end
 end

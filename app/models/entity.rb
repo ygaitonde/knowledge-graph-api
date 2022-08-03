@@ -21,17 +21,15 @@ class Entity < ApplicationRecord
 
       return nil unless property.present?
 
-      value = Value.find_by(property: property, entity: acc)
-
-      value.value
+      Value.find_by(property: property, entity: acc).value
     end
   end
 
-  def save_with_values!(values)
+  def save_with_values(values)
     ActiveRecord::Base.transaction do
       values.each { |v| v.update(entity_id: id) }
-      save!
-      values.each(&:save!)
+      save
+      values.each(&:save)
     end
   end
 

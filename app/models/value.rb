@@ -37,6 +37,6 @@ class Value < ApplicationRecord
   private
 
   def entity_matches_reference?
-    entity_value&.entity_type == property.reference_type
+    entity_value&.entity_type == property&.reference_type
   end
 end

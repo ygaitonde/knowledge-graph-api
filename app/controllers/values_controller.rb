@@ -6,7 +6,7 @@ class ValuesController < ApplicationController
 
     return render json: { error: 'Entity not found' }, status: :not_found unless entity.present?
 
-    value = entity.find_value_from_chain(chain)
+    value = entity.find_value_from_chain(params[:chain])
 
     return render json: { error: 'Value not found' }, status: :not_found unless value.present?
 
@@ -16,6 +16,6 @@ class ValuesController < ApplicationController
   private
 
   def show_params
-    params.permit(chain: [])
+    params.require(:chain)
   end
 end

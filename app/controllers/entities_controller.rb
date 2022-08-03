@@ -10,8 +10,9 @@ class EntitiesController < ApplicationController
 
     values = entity.create_values_from_params(entity_params[:values].to_h)
 
+    entity.save_with_values(values)
+
     if entity&.valid? && values.all?(&:valid?)
-      entity.save_with_values!(values)
       render json: entity
     else
       value_errors = values&.map { |value| value.errors.full_messages }&.flatten

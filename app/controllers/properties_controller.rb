@@ -2,13 +2,7 @@
 
 class PropertiesController < ApplicationController
   def index
-    entity = Entity.find(entity_params[:entity_id])
+    entity = Entity.find(params[:entity_id])
     render json: entity.entity_type.properties.select(:id, :label, :data_type)
-  end
-
-  private
-
-  def entity_params
-    params.require(:entity)
   end
 end
