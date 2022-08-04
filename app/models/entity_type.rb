@@ -10,6 +10,14 @@
 #  updated_at :datetime         not null
 #
 class EntityType < ApplicationRecord
+  include Discard::Model
+
   has_many :entities
   has_many :properties
+
+  class << self
+    def create_types_from_labels(labels)
+      labels.each { |label| EntityType.create!(label: label) }
+    end
+  end
 end

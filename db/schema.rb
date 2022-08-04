@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_729_053_923) do
+ActiveRecord::Schema[7.0].define(version: 20_220_804_011_331) do
   create_table 'entities', force: :cascade do |t|
     t.integer 'entity_type_id', null: false
     t.datetime 'created_at', null: false
@@ -24,6 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 20_220_729_053_923) do
     t.string 'label'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.datetime 'discarded_at'
+    t.index ['discarded_at'], name: 'index_entity_types_on_discarded_at'
   end
 
   create_table 'properties', force: :cascade do |t|
@@ -33,6 +35,8 @@ ActiveRecord::Schema[7.0].define(version: 20_220_729_053_923) do
     t.integer 'reference_type_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.datetime 'discarded_at'
+    t.index ['discarded_at'], name: 'index_properties_on_discarded_at'
     t.index ['entity_type_id'], name: 'index_properties_on_entity_type_id'
     t.index ['reference_type_id'], name: 'index_properties_on_reference_type_id'
   end
