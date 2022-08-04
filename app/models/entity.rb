@@ -17,7 +17,7 @@ class Entity < ApplicationRecord
 
   def find_value_from_chain(chain)
     chain.reduce(self) do |acc, property_name|
-      property = Property.find_by(entity_type: acc&.entity_type, label: property_name)
+      property = Property.kept.find_by(entity_type: acc&.entity_type, label: property_name)
 
       return nil unless property.present?
 
@@ -35,7 +35,7 @@ class Entity < ApplicationRecord
 
   def create_values_from_params(values)
     values.map do |property_name, value|
-      property = Property.where(entity_type: entity_type).find_by(label: property_name)
+      property = Property.kept.where(entity_type: entity_type).find_by(label: property_name)
 
       create_value(property, value)
     end
