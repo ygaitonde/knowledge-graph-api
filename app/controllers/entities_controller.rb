@@ -2,11 +2,13 @@
 
 class EntitiesController < ApplicationController
   def create
-    entity_type = EntityType.find_by(label: entity_params[:type])
+    entity_type = EntityType.kept.find_by(label: entity_params[:type])
 
     return render json: { error: 'Entity type not found' }, status: :not_found unless entity_type.present?
 
     entity = Entity.new(entity_type: entity_type)
+
+    binding.pry
 
     values = entity.create_values_from_params(entity_params[:values].to_h)
 

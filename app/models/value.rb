@@ -18,6 +18,7 @@ class Value < ApplicationRecord
   belongs_to :entity_value, class_name: 'Entity', foreign_key: :entity_value_id, optional: true
 
   validate :valid_entity_value
+  validate :property_not_discarded
 
   def value
     case property.data_type
@@ -38,5 +39,11 @@ class Value < ApplicationRecord
 
   def entity_matches_reference?
     entity_value&.entity_type == property&.reference_type
+  end
+
+  def property_not_discarded
+    return if property.present? && property.kept?
+
+    errors.add(:property, 'must be valid')
   end
 end

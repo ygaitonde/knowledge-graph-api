@@ -14,6 +14,7 @@ class Entity < ApplicationRecord
   has_many :values
 
   validate :values_for_all_properties
+  validate :type_not_discarded
 
   def find_value_from_chain(chain)
     chain.reduce(self) do |acc, property_name|
@@ -34,6 +35,7 @@ class Entity < ApplicationRecord
   end
 
   def create_values_from_params(values)
+    binding.pry
     values.map do |property_name, value|
       property = Property.kept.where(entity_type: entity_type).find_by(label: property_name)
 
@@ -61,5 +63,11 @@ class Entity < ApplicationRecord
         errors.add(:values, "missing value for #{property.label}")
       end
     end
+  end
+
+  def type_not_discarded
+    return if entity_type.present? && entity_type.kept?
+
+    errors.add(:entity_type, 'is discarded')
   end
 end

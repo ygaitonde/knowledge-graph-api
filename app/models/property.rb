@@ -27,14 +27,14 @@ class Property < ApplicationRecord
     def initialize_from_schema(key, entity_type)
       case key['type']['name']
       when Property::DataType::STRING
-        Property.find_or_initialize_by(entity_type: entity_type, label: key['name'],
-                                       data_type: Property::DataType::STRING)
+        Property.create!(entity_type: entity_type, label: key['name'],
+                         data_type: Property::DataType::STRING)
       when Property::DataType::ENTITY
-        reference_type = EntityType.find_by(label: key['type']['referenceType'])
+        reference_type = EntityType.kept.find_by(label: key['type']['referenceType'])
 
         raise "Invalid reference type on property #{key['name']}." if reference_type.nil?
 
-        Property.find_or_initialize_by(
+        Property.create!(
           entity_type: entity_type,
           label: key['name'],
           data_type: Property::DataType::ENTITY,
