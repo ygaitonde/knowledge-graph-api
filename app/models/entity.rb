@@ -35,7 +35,6 @@ class Entity < ApplicationRecord
   end
 
   def create_values_from_params(values)
-    binding.pry
     values.map do |property_name, value|
       property = Property.kept.where(entity_type: entity_type).find_by(label: property_name)
 

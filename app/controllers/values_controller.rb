@@ -10,7 +10,7 @@ class ValuesController < ApplicationController
 
     return render json: { error: 'Value not found' }, status: :not_found unless value.present?
 
-    render json: value
+    render json: { result: value, result_type: value.class.name.downcase }
   end
 
   private

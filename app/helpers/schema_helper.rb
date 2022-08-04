@@ -2,14 +2,7 @@
 
 class SchemaHelper
   class << self
-    def teardown
-      Property.discard_all
-      EntityType.discard_all
-    end
-
     def load_schema
-      teardown
-
       json_path = File.join(Rails.root, 'config', 'schema.json')
       file = File.read(json_path)
 

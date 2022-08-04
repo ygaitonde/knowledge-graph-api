@@ -2,11 +2,6 @@
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or create!!d alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create!!([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create!!(name: 'Luke', movie: movies.first)
 
 # fruit = EntityType.create!(label: 'Fruit')
 # color = EntityType.create!(label: 'Color')
@@ -28,7 +23,6 @@
 # red = Entity.new(entity_type: color)
 # red_values = [Value.new(entity: red, property: color_name, string_value: 'red')]
 # red.save_with_values(red_values)
-# binding.pry
 
 # apple = Entity.new(entity_type: fruit)
 # apple_values = [
@@ -36,4 +30,3 @@
 #   Value.new(entity: apple, property: fruit_color, entity_value: red)
 # ]
 # apple.save_with_values(apple_values)
-# binding.pry

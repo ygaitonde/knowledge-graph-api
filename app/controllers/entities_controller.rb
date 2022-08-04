@@ -8,8 +8,6 @@ class EntitiesController < ApplicationController
 
     entity = Entity.new(entity_type: entity_type)
 
-    binding.pry
-
     values = entity.create_values_from_params(entity_params[:values].to_h)
 
     entity.save_with_values(values)
