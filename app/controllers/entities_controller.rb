@@ -16,6 +16,7 @@ class EntitiesController < ApplicationController
       render json: entity
     else
       value_errors = values&.map { |value| value.errors.full_messages }&.flatten
+      # combine the errors and value errors into one array
       errors = entity&.errors&.full_messages&.concat(value_errors)&.flatten
       render json: { errors: errors }, status: :unprocessable_entity
     end

@@ -17,7 +17,7 @@ class EntityType < ApplicationRecord
 
   class << self
     def create_types_from_labels(labels)
-      labels.each { |label| EntityType.create!(label: label) }
+      labels.each { |label| EntityType.find_or_create_by!(label: label) } 
     end
   end
 end

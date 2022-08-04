@@ -17,6 +17,8 @@ class SchemaHelper
         schema['types'].each do |type|
           entity_type = EntityType.find_by(label: type['name'])
 
+          raise 'No keys found in schema.' unless type['keys'].present?
+
           type['keys'].each do |key|
             property = Property.initialize_from_schema(key, entity_type)
             if property.new_record?

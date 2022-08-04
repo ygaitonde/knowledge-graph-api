@@ -16,6 +16,7 @@ class Entity < ApplicationRecord
   validate :values_for_all_properties
   validate :type_not_discarded
 
+  # we either reduce the chain until we find a terminal value or return nil
   def find_value_from_chain(chain)
     chain.reduce(self) do |acc, property_name|
       property = Property.kept.find_by(entity_type: acc&.entity_type, label: property_name)
@@ -28,6 +29,7 @@ class Entity < ApplicationRecord
 
   def save_with_values(values)
     ActiveRecord::Base.transaction do
+      # we need to update the value entity id before we can save the entity
       values.each { |v| v.update(entity_id: id) }
       save
       values.each(&:save)
