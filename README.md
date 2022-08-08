@@ -23,6 +23,6 @@ Ensure you have Ruby 2.7.5 installed
 1. Modify the `config/schema.json` as you see fit.
 2. `rake db:reset`. Note that this will also delete any entities under the old schema.
 
-# Next Steps
+## Next Steps
 - Configure multi-stage builds so that we can automatically detect and account for schema changes.
 - Add more types, and split the `values` table into `string_values`, `entity_values`, `other_type_values` tables
